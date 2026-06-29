@@ -18,6 +18,7 @@ class PlayerHeuristic:
         return p
 
     def select_opponent_piece(self, _):
+        print(self.opponent_piece_ratings)
         min_danger = math.inf
         best_piece_index = 0
         for index, rating in self.opponent_piece_ratings.items():
@@ -38,8 +39,8 @@ class PlayerHeuristic:
 
         # this calculation only works if we always assume
         # there is a piece in this lane
-        common_positive_bitmask = 0
-        common_negative_bitmask = 0
+        common_positive_bitmask = 15
+        common_negative_bitmask = 15
 
         for cell in lane_values:
             if cell != " ":
@@ -54,7 +55,7 @@ class PlayerHeuristic:
 
         num_opponent_matching = 0
         num_self_matching = 0
-        for piece in opponent.pieces:
+        for piece in self.opponent.pieces:
             if piece.type_bitmask & common_positive_bitmask != 0:
                 num_opponent_matching += 1
 
@@ -68,7 +69,7 @@ class PlayerHeuristic:
             if ~piece.type_bitmask & common_negative_bitmask != 0:
                 num_self_matching += 1
 
-        for piece_index, piece in enumerate(opponent.pieces):
+        for piece_index, piece in enumerate(self.opponent.pieces):
             if piece.type_bitmask & common_positive_bitmask != 0 or ~piece.type_bitmask & common_negative_bitmask != 0:
                 if num_blanks == 3:
                     if num_opponent_matching >= 3:
