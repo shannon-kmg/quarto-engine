@@ -1,0 +1,3 @@
+all player types take opponent as constructor argument
+
+empty cell is None instead of " "
