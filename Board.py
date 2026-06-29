@@ -71,7 +71,7 @@ class Board:
         for i in range(len(self.board[0])):
             cells = []
             for j in range(len(self.board)):
-                cells.append((i,j))
+                cells.append((j,i))
             lanes.append(cells)
 
         # diagonal 

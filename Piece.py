@@ -11,6 +11,8 @@ class Piece:
         if self.overline: self.type_bitmask += 4
         if self.underline: self.type_bitmask += 8
 
+    def __repr__(self):
+        return self.draw()
     def draw(self):
         c = ""
         if self.overline:
