@@ -12,7 +12,7 @@ def play_game():
     b.draw()
     while True:
         # Q turn
-        if len(b.valid_cells()) == 0:
+        if b.check_draw():
             print("Draw!")
             return
         q.move(b, g.select_opponent_piece(q))
@@ -22,7 +22,7 @@ def play_game():
             print("Q won!")
             return
         # G turn
-        if len(b.valid_cells()) == 0:
+        if b.check_draw():
             print("Draw!")
             return
         g.move(b, q.select_opponent_piece(g))

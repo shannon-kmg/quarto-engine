@@ -119,3 +119,6 @@ class Board:
             if self.test_match(lane):
                 return True
         return False
+
+    def check_draw(self):
+        return len(self.valid_cells()) == 0
