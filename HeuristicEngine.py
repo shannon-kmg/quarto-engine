@@ -67,6 +67,9 @@ class HeuristicEngine:
         score = 0
         le = LaneEvaluation(lane, self.player, self.opponent, board)
 
+        if le.num_blanks == 0:
+            return math.inf
+
         if le.num_blanks == 3:
             if le.num_opponent_matching >= 3:
                 score -= 2
