@@ -109,7 +109,7 @@ class HeuristicEngine:
                 if le.num_blanks == 2:
                     if le.num_player_matching >= 2:
                         danger_ratings[piece_index] -= 1
-                    else:
+                    elif le.num_opponent_matching >= 2:
                         danger_ratings[piece_index] += 1
                 if le.num_blanks == 1:
                     danger_ratings[piece_index] += math.inf
@@ -120,30 +120,6 @@ class HeuristicEngine:
             return
         for i, d in enumerate(dangers):
             self.opponent_piece_dangers[i] += d
-
-    # calculate the value of having a particular piece in hand for a given baord
-    def calc_board_score(self, board, piece):
-        if board.check_win():
-            return -math.inf
-        if board.check_draw():
-            return 0
-
-        valid_cells = board.valid_cells()
-        self.opponent_piece_dangers = [0] * len(self.opponent.pieces)
-
-        for cell in valid_cells:
-            score = 0
-            for lane in board.get_coord_lanes():
-                if cell in lane:
-                    cur_dangers = self.calculate_opponent_danger(lane, board)
-                    self.update_piece_dangers(cur_dangers)
-                    board.place(piece, cell[0], cell[1])
-                    score += self.score_lane(lane, board)
-                    est_dangers = self.calculate_opponent_danger(lane, board)
-                    board.unplace(cell[0], cell[1])
-                    score += (min(cur_dangers) - min(est_dangers))
-
-        return score
 
     def get_best_move(self, board, piece):
         valid_cells = board.valid_cells()
