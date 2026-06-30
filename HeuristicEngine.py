@@ -2,12 +2,13 @@ import random
 import math
 from Piece import Piece
 
+
 class LaneEvaluation:
     def __init__(self, lane, player, opponent, board):
         self.player = player
         self.opponent = opponent
         self.num_player_matching = 0
-        self.num_opponent_matching = 0 
+        self.num_opponent_matching = 0
         self.lane_values = [board.board[cell[0]][cell[1]] for cell in lane]
         self.num_blanks = self.lane_values.count(" ")
 
@@ -41,6 +42,7 @@ class LaneEvaluation:
             if ~piece.type_bitmask & self.common_negative_bitmask != 0:
                 self.num_player_matching += 1
 
+
 class HeuristicEngine:
     def __init__(self, player, opponent):
         self.opponent = opponent
@@ -62,7 +64,7 @@ class HeuristicEngine:
     def pop_danger(self, index):
         del self.opponent_piece_dangers[index]
         return self.opponent.remove_piece(index)
-    
+
     def score_lane(self, lane, board):
         score = 0
         le = LaneEvaluation(lane, self.player, self.opponent, board)
@@ -78,7 +80,7 @@ class HeuristicEngine:
             # this is 3 instead of 2 because the piece we
             # are considering placing has not been removed
             # from our rack yet.
-            elif le.num_player_matching >= 3: 
+            elif le.num_player_matching >= 3:
                 score += 1
         if le.num_blanks == 2:
             if le.num_player_matching >= 2:
@@ -100,12 +102,14 @@ class HeuristicEngine:
 
         danger_ratings = [0] * len(self.opponent.pieces)
 
-
         if le.num_blanks == 4:
             return danger_ratings
 
         for piece_index, piece in enumerate(self.opponent.pieces):
-            if piece.type_bitmask & le.common_positive_bitmask != 0 or ~piece.type_bitmask & le.common_negative_bitmask != 0:
+            if (
+                piece.type_bitmask & le.common_positive_bitmask != 0
+                or ~piece.type_bitmask & le.common_negative_bitmask != 0
+            ):
                 if le.num_blanks == 3:
                     if le.num_opponent_matching >= 3:
                         danger_ratings[piece_index] += 10
@@ -141,7 +145,7 @@ class HeuristicEngine:
                     score += self.score_lane(lane, board)
                     est_dangers = self.calculate_opponent_danger(lane, board)
                     board.unplace(cell[0], cell[1])
-                    score += (min(cur_dangers) - min(est_dangers))
+                    score += min(cur_dangers) - min(est_dangers)
             if score > best_score:
                 best_score = score
                 best_cell = cell

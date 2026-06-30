@@ -2,6 +2,8 @@ import random
 import math
 from Piece import Piece
 from HeuristicEngine import HeuristicEngine
+
+
 class PlayerHeuristic:
     def __init__(self, q, opponent):
         self.player_name = "Q" if q else "G"

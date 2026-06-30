@@ -1,4 +1,6 @@
 from Piece import Piece
+
+
 class PlayerConsole:
     def __init__(self, q):
         self.player_name = "Q" if q else "G"

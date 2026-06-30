@@ -6,13 +6,18 @@ class Piece:
         self.underline = underline
 
         self.type_bitmask = 0
-        if self.q: self.type_bitmask += 1
-        if self.uppercase: self.type_bitmask += 2
-        if self.overline: self.type_bitmask += 4
-        if self.underline: self.type_bitmask += 8
+        if self.q:
+            self.type_bitmask += 1
+        if self.uppercase:
+            self.type_bitmask += 2
+        if self.overline:
+            self.type_bitmask += 4
+        if self.underline:
+            self.type_bitmask += 8
 
     def __repr__(self):
         return self.draw()
+
     def draw(self):
         c = ""
         if self.overline:

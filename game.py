@@ -5,6 +5,7 @@ from PlayerConsole import PlayerConsole
 from PlayerRandom import PlayerRandom
 from PlayerHeuristic import PlayerHeuristic
 
+
 def play_game():
     b = Board()
     q = PlayerRandom(True)

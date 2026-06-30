@@ -64,31 +64,28 @@ class Board:
         for i in range(len(self.board)):
             cells = []
             for j in range(len(self.board[i])):
-                cells.append((i,j))
+                cells.append((i, j))
             lanes.append(cells)
 
         # vertical
         for i in range(len(self.board[0])):
             cells = []
             for j in range(len(self.board)):
-                cells.append((j,i))
+                cells.append((j, i))
             lanes.append(cells)
 
-        # diagonal 
-            lanes.append([
-                (0,0), (1,1), (2,2), (3,3)
-            ])
+            # diagonal
+            lanes.append([(0, 0), (1, 1), (2, 2), (3, 3)])
 
-            lanes.append([
-                (0,3), (1,2), (2,1), (3,0)
-            ])
+            lanes.append([(0, 3), (1, 2), (2, 1), (3, 0)])
 
         return lanes
+
     def get_lanes(self):
         lanes = []
 
         # horizontal
-        lanes += self.board 
+        lanes += self.board
 
         # vertical
         for i in range(len(self.board[0])):
@@ -97,20 +94,24 @@ class Board:
                 cells.append(self.board[j][i])
             lanes.append(cells)
 
-        # diagonal 
-            lanes.append([
-                self.board[0][0],
-                self.board[1][1],
-                self.board[2][2],
-                self.board[3][3],
-            ])
+            # diagonal
+            lanes.append(
+                [
+                    self.board[0][0],
+                    self.board[1][1],
+                    self.board[2][2],
+                    self.board[3][3],
+                ]
+            )
 
-            lanes.append([
-                self.board[0][3],
-                self.board[1][2],
-                self.board[2][1],
-                self.board[3][0],
-            ])
+            lanes.append(
+                [
+                    self.board[0][3],
+                    self.board[1][2],
+                    self.board[2][1],
+                    self.board[3][0],
+                ]
+            )
 
         return lanes
 

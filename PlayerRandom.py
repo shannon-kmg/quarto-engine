@@ -1,5 +1,7 @@
 import random
 from Piece import Piece
+
+
 class PlayerRandom:
     def __init__(self, q):
         self.player_name = "Q" if q else "G"
@@ -15,7 +17,7 @@ class PlayerRandom:
         return p
 
     def select_opponent_piece(self, opponent):
-        index = random.randint(0, len(opponent.pieces) -1)
+        index = random.randint(0, len(opponent.pieces) - 1)
         return opponent.remove_piece(index)
 
     def draw_pieces(self):
